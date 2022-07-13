@@ -1,0 +1,18 @@
+{
+  "string" : {
+    "joinSep" : ".",
+    "keySep" : ":",
+    "keySpace" : true
+  },
+  "logging" : {
+    "level" : 0,
+    "path"  : "logs/current.log",
+    "archive" : {
+      "path"   : "logs/old",
+      "format" : "%Y.%m.%d - %H.%M.%S",
+      "header" : "template/headerLogs.tmpl",
+      "key"    : "Timestamp",
+      "noTimestampFormat" : "%Y.%m.%d - %H.%M.%S.{uuid}.previous"
+    }
+  }
+}
