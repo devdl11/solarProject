@@ -1,12 +1,14 @@
 {
   "string" : {
-    "joinSep" : ".",
-    "keySep" : ":",
+    "joinSep"  : ".",
+    "keySep"   : ":",
     "keySpace" : true
   },
   "logging" : {
     "level" : 0,
     "path"  : "logs/current.log",
+    "inFileDateFormat" : "%H.%M.%S ",
+    "inFileFormat" : "{asctime}.{msecs} - |{threadName}| [{levelname}] : {filename} > {module} > {funcName} ({lineno}) ::> {message}",
     "archive" : {
       "path"   : "logs/old",
       "format" : "%Y.%m.%d - %H.%M.%S",
@@ -14,5 +16,5 @@
       "key"    : "Timestamp",
       "noTimestampFormat" : "%Y.%m.%d - %H.%M.%S.{uuid}.previous"
     }
-  }
+  } 
 }
