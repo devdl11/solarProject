@@ -15,7 +15,6 @@ if len(sys.argv) > 1:
 
 ## We setup some constants
 
-CONFIG_PATH = "./config/current.json"
 DEFAULT_CONFIG_PATH = "./config/default.json"
 
 ## Before doing anything, we load the configurations
@@ -27,6 +26,12 @@ from shutil import move
 from datetime import datetime
 import os
 import pytz
+
+CONFIG_PATH = config.DATA_DIRECTORY + "current.json"
+
+## We create the default directorys if they don't exist
+os.makedirs(config.LOG_DIRECTORY, exist_ok=True)
+os.makedirs(config.DATA_DIRECTORY, exist_ok=True)
 
 ## Set our timezone
 TIMEZONE = pytz.timezone("europe/bucharest")

@@ -1,4 +1,3 @@
-.vscode*
-logs*
+.vscode/*
 config/current.json
 persistent/*

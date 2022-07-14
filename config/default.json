@@ -16,5 +16,8 @@
       "key"    : "Timestamp",
       "noTimestampFormat" : "%Y.%m.%d - %H.%M.%S.{uuid}.previous"
     }
-  } 
+  },
+  "database" : {
+    "path" : "db/storage.db"
+  }
 }

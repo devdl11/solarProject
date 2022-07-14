@@ -41,6 +41,7 @@ class Configuration:
     config = json.loads(config)
     self.logging = config["logging"]
     self.string = config["string"]
+    self.database = config["database"]
     
   def getJoinSeparator(self) -> str:
     return self.string["joinSep"]
@@ -111,3 +112,6 @@ class Configuration:
     if check < 0:
       return check
     return int(removeEndOfLine(header_logs[start_at:end_at]))
+  
+  def getDatabaseFilePath(self):
+    return self.database["path"]
