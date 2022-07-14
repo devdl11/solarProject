@@ -1,4 +1,5 @@
 import sqlite3
 
 class Storage:
-  pass
+  def __init__(self, databasePath : str) -> None:
+    pass

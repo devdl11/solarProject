@@ -10,6 +10,7 @@ class GPIOManager:
     self.loopRun = False
     self.thread = None
     logging.info("GPIOManager: Cleaning up...")
+    GPIO.cleanup()
     
 
   def __loop(self):
