@@ -3,6 +3,12 @@ from src.utility import removeEndOfLine
 from src.solarparser import configParser
 from enum import Enum
 
+## Some constants
+### We need to set up these paths because docker is bonded to them
+LOG_DIRECTORY = "logs/"
+DATA_DIRECTORY = "data/"
+###
+
 class SolarLoggingLevel(Enum):
   DEBUG     = 0
   INFO      = 1
@@ -46,10 +52,10 @@ class Configuration:
     return self.string["keySpace"]
     
   def getLoggingPath(self) -> str:
-    return self.logging["path"]
+    return LOG_DIRECTORY + self.logging["path"]
   
   def getArchiveLoggingPath(self) -> str:
-    return self.logging["archive"]["path"]
+    return LOG_DIRECTORY + self.logging["archive"]["path"]
   
   def getArchiveFormat(self) -> str:
     return self.logging["archive"]["format"]

@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  solar:
+    build: .
+    volumes:
+      - ./persistent/solarlogs:/solarproject/logs 
+      - ./persistent/solardata:/solarproject/data

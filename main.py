@@ -1,5 +1,18 @@
 # Here we start
 
+## we check if we have an argument
+import sys
+
+if len(sys.argv) > 1:
+  ## we start with argument, we check if it exists and execute the corresponding function
+  if sys.argv[1] == "clean":
+    import os
+    if os.path.exists("logs"):
+      os.system("rm -rf logs")
+    if os.path.exists("data"):
+      os.system("rm -rf data")
+    exit(0)
+
 ## We setup some constants
 
 CONFIG_PATH = "./config/current.json"
@@ -85,4 +98,5 @@ logging.basicConfig(
 logging.info("Starting Solar System...")
 
 # Now we can initialize the rest 
+
 

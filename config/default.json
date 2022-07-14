@@ -6,11 +6,11 @@
   },
   "logging" : {
     "level" : 0,
-    "path"  : "logs/current.log",
+    "path"  : "current.log",
     "inFileDateFormat" : "%H.%M.%S ",
     "inFileFormat" : "{asctime}.{msecs} - |{threadName}| [{levelname}] : {filename} > {module} > {funcName} ({lineno}) ::> {message}",
     "archive" : {
-      "path"   : "logs/old",
+      "path"   : "old",
       "format" : "%Y.%m.%d - %H.%M.%S",
       "header" : "template/headerLogs.tmpl",
       "key"    : "Timestamp",
