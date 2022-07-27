@@ -1,6 +1,9 @@
-# Dummy Sensor
+# Dummy Module
 from enum import Enum
 from typing import Callable
+import typing
+
+from src.gpio import GPIO
 
 class DummyStatus(Enum):
   DEACTIVATED = 0
@@ -9,13 +12,19 @@ class DummyStatus(Enum):
 class DummyType(Enum):
   SENSOR = 0
   MOTOR  = 1
-
-class DummySensorType(Enum):
+  
+class DummyGPIOType(Enum):
   ANALOG  = 0
   DIGITAL = 1
+  ONEWIRE = 2
 
+class DummyGPIOStatus(Enum):
+  IN = 0
+  OUT = 1
 
 class Dummy:
+  gpio: GPIO
+  api: typing.List[object]
   class InputApi:
     def __init__(self, func : Callable, desc : str, name : str) -> None:
       self.callback = func
@@ -35,7 +44,13 @@ class Dummy:
       return False
   
   def __init__(self) -> None:
+    """ Initializes the extension.
+    """
     self.gpio = None
+    # In this variable we define all the input API of the extension.
+    self.api = [
+      self.InputApi(self.input_exemple, "Example of how to use the input API.", "input_exemple")
+    ]
 
   def manifest(self) -> object:
     """ Returns the manifest of the extension.
@@ -48,8 +63,16 @@ class Dummy:
       "version": "1.0.0",
       "description": "Dummy sensor",
       "type": DummyType.SENSOR,
-      "subtype": DummySensorType.ANALOG,
+      "subtype": DummyGPIOType.ANALOG,
       "status": DummyStatus.DEACTIVATED,
+      "uuid": "62b5c377-94f3-4fb9-a134-40b8696a4e37",
+      "gpios": [0], # The GPIO order has to be the same as the mapping order
+      "mapping": [
+        DummyGPIOStatus.OUT
+      ],
+      "metadata" : {
+        "address" : "random", # Address of the sensor in case of onewire
+      }
     }
     
   def read(self) -> object:
@@ -59,11 +82,23 @@ class Dummy:
         object: The value of the sensor.
     """    
     return
+  
+  def read_raw(self) -> object:
+    pass
     
-  def background(self) -> None:
+  def background(self, callback: typing.Callable) -> None:
     """ Background code of the extension. Here the extension can grab some data and save it in database.
     """    
     pass
   
-  def input_api(self) -> object:
+  def input_api(self) -> typing.List[object]:
+    return self.api
+  
+  def register_gpio(self, gpio : GPIO) -> None:
+    self.gpio = gpio
+    
+  def input_exemple(self) -> None:
+    """ Example of how to use the input API.
+    In this function we write what we want to the sensor/actuator.
+    """
     pass

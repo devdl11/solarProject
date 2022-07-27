@@ -5,3 +5,4 @@ services:
     volumes:
       - ./persistent/solarlogs:/solarproject/logs 
       - ./persistent/solardata:/solarproject/data
+      - /sys/bus/w1/devices:/solarproject/devices

@@ -114,4 +114,4 @@ class Configuration:
     return int(removeEndOfLine(header_logs[start_at:end_at]))
   
   def getDatabaseFilePath(self):
-    return self.database["path"]
+    return DATA_DIRECTORY + self.database["path"]

@@ -10,3 +10,5 @@ def removeEndOfLine(param : str) -> str:
   """  
   return param.replace("\n", "").replace("\r", "")
 
+def digitalWriteParser(value: int):
+    return 0 if value == 0 else 1

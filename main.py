@@ -2,6 +2,7 @@
 
 ## we check if we have an argument
 import sys
+import time
 
 if len(sys.argv) > 1:
   ## we start with argument, we check if it exists and execute the corresponding function
@@ -16,10 +17,11 @@ if len(sys.argv) > 1:
 ## We setup some constants
 
 DEFAULT_CONFIG_PATH = "./config/default.json"
+EXTENTIONS_PATH = "./extensions/"
 
 ## Before doing anything, we load the configurations
 import shutil
-from src import config
+from src import config, storage, gpiomanager
 
 from os import path
 from shutil import move
@@ -104,4 +106,27 @@ logging.info("Starting Solar System...")
 
 # Now we can initialize the rest 
 
+myStorage = storage.Storage(myConfiguration.getDatabaseFilePath())
+myGPIOManager = gpiomanager.GPIOManager(myStorage)
 
+## We dynamically load the modules
+
+for file in os.listdir(EXTENTIONS_PATH):
+  if file.endswith(".py") and file != "__init__.py":
+    module = file[:-3]
+    logging.info("Loading extension: " + module)
+    # we expect that the class name is the same as the module name
+    exec("from " + (EXTENTIONS_PATH[2:] + module).replace("/", ".") + " import " + module.capitalize())
+    exec("myGPIOManager.addSensor(" + module.capitalize() + "())")
+    logging.info("Extension loaded: " + module.capitalize())
+  else:
+    logging.info("Skipping file: " + file)
+    
+## We start our gpio loop
+myGPIOManager.run_loop()
+
+## Here we manage the API
+
+# TODO: implement the API
+while True:
+  time.sleep(5)
